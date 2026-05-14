@@ -59,7 +59,7 @@ namespace Database_lab_project.Controllers
                     {
                         TempData["Message"] = "Login Successful";
                         TempData["Type"] = "success";
-                        return RedirectToAction("Login");
+                        return RedirectToAction("Dashboard");
                     }
 
                 }
@@ -96,6 +96,11 @@ namespace Database_lab_project.Controllers
 
                 return RedirectToAction("Login");
             }
+        }
+
+        public IActionResult Dashboard()
+        {
+            return View();
         }
 
     }
