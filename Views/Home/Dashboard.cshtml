@@ -1,6 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Dashboard";
 }
+@if (TempData["Message"] != null)
+{
+    <div class="popup @TempData["Type"]">
+        @TempData["Message"]
+    </div>
+}
 
 <div class="dash-page">
     <nav class="dash-nav">
@@ -14,6 +20,7 @@
 
     <section class="hero">
         <p class="badge">LOST & FOUND PLATFORM</p>
+        <p>user id: @ViewBag.userId</p>
         <h1>Reuniting people<br />with their <span>belongings</span></h1>
         <p class="hero-text">Browse items reported lost or found in your area. Submit a report and help someone recover what matters.</p>
 
@@ -49,10 +56,10 @@
         <button class="close-btn" onclick="closeModal('foundModal')">×</button>
         <div class="modal-title found-dot"><span></span><h2>Report Found Item</h2></div>
 
-        <form>
+        <form method="post" action="/Home/ReportFound">
             <h4>ITEM DETAILS</h4>
             <label>Item Title *</label>
-            <input placeholder="e.g. Blue Nokia Phone" />
+            <input name="itemTitle" placeholder="e.g. Blue Nokia Phone" />
 
             <div class="row">
                 <div>
@@ -71,15 +78,15 @@
                 </div>
                 <div>
                     <label>Date Found *</label>
-                    <input type="date" />
+                    <input name="lostDate" type="date" />
                 </div>
             </div>
 
             <label>Location Found *</label>
-            <input placeholder="e.g. Dolmen Mall, Clifton" />
+            <input name="lostLocation" placeholder="e.g. Dolmen Mall, Clifton" />
 
             <label>Description</label>
-            <textarea placeholder="Describe the item so the owner can identify it..."></textarea>
+            <textarea name="description" placeholder="Describe the item so the owner can identify it..."></textarea>
 
             <button class="submit-found">Report Found Item</button>
         </form>
