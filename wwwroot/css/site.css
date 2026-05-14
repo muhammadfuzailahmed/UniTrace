@@ -34,6 +34,11 @@ html, body {
     cursor: pointer;
 }
 
+.HeaderLink {
+    text-decoration: none;
+    color: white;
+}
+
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
     color: var(--bs-secondary-color);
     text-align: end;
@@ -199,5 +204,230 @@ button {
     to {
         opacity: 0;
         transform: translateX(40px) scale(0.95);
+    }
+}
+
+/*Dashboard Page CSS*/
+
+.dash-page {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, rgba(0, 140, 255, 0.22), transparent 38%), radial-gradient(circle at bottom, rgba(0, 80, 180, 0.16), transparent 35%), #05070c;
+    color: #f5f7ff;
+    font-family: Inter, Segoe UI, Arial, sans-serif;
+}
+
+.dash-nav {
+    height: 78px;
+    padding: 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+}
+
+    .logo span,
+    .hero span {
+        color: #00aaff;
+    }
+
+.nav-actions,
+.hero-buttons,
+.row {
+    display: flex;
+    gap: 16px;
+}
+
+.hero {
+    text-align: center;
+    padding: 120px 20px 60px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px solid #00aaff;
+    border-radius: 999px;
+    color: #00aaff;
+    letter-spacing: 2px;
+    font-size: 13px;
+    box-shadow: 0 0 20px rgba(0,170,255,0.2);
+}
+
+.hero h1 {
+    font-size: 72px;
+    line-height: 0.95;
+    margin: 28px 0;
+    font-weight: 950;
+}
+
+.hero-text {
+    color: #8c98b8;
+    max-width: 620px;
+    margin: auto;
+    font-size: 18px;
+}
+
+.hero-buttons {
+    justify-content: center;
+    margin-top: 36px;
+}
+
+.green-btn,
+.outline-red {
+    padding: 12px 22px;
+    border-radius: 14px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.green-btn {
+    background: linear-gradient(135deg, #00aaff, #006eff);
+    color: white;
+    border: none;
+}
+
+.outline-red {
+    background: transparent;
+    color: #00aaff;
+    border: 1px solid #00aaff;
+}
+
+    .green-btn:hover,
+    .outline-red:hover {
+        box-shadow: 0 14px 38px rgba(0, 145, 255, 0.38);
+        transform: translateY(-1px);
+    }
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    place-items: center;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    padding: 18px;
+}
+
+.modal-card {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    max-height: 96vh;
+    overflow: hidden;
+    background: rgba(12, 16, 26, 0.96);
+    border: 1px solid rgba(0, 145, 255, 0.22);
+    border-radius: 24px;
+    padding: 26px;
+    box-shadow: 0 0 45px rgba(0, 145, 255, 0.18), 0 30px 90px rgba(0,0,0,0.75);
+}
+
+.close-btn {
+    position: absolute;
+    right: 22px;
+    top: 22px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #101522;
+    color: #8c98b8;
+    border: 1px solid #24324d;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-title h2 {
+    font-size: 26px;
+    margin: 0;
+}
+
+.modal-title span {
+    width: 18px;
+    height: 18px;
+    background: #00aaff;
+    box-shadow: 0 0 28px #00aaff;
+}
+
+form h4 {
+    color: #8c98b8;
+    font-size: 15px;
+    letter-spacing: 4px;
+    margin: 18px 0 10px;
+}
+
+label {
+    display: block;
+    color: #b9c7e8;
+    font-weight: 700;
+    font-size: 13px;
+    margin: 8px 0 5px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 11px 13px;
+    border-radius: 12px;
+    border: 1px solid #24324d;
+    background: #101522;
+    color: white;
+    font-size: 14px;
+    outline: none;
+}
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #00aaff;
+        box-shadow: 0 0 0 4px rgba(0,170,255,0.14);
+    }
+
+textarea {
+    min-height: 65px;
+}
+
+.row > div {
+    flex: 1;
+}
+
+.submit-found,
+.submit-lost {
+    width: 100%;
+    margin-top: 16px;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #00aaff, #006eff);
+    color: white;
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .row,
+    .nav-actions {
+        flex-direction: column;
+    }
+
+    .dash-nav {
+        height: auto;
+        padding: 24px;
+        gap: 20px;
+        flex-direction: column;
     }
 }
