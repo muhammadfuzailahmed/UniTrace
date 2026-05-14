@@ -44,7 +44,7 @@ namespace Database_lab_project.Controllers
             using (SqlConnection conn = new SqlConnection(connectionString)) {
                 conn.Open();
 
-                string query = "select email, password from users";
+                string query = "select id, email, password from users";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -54,9 +54,11 @@ namespace Database_lab_project.Controllers
                 {
                     string dbEmail = reader["email"].ToString();
                     string dbpassword = reader["password"].ToString();
+                    int userId = Convert.ToInt32(reader["id"]);
 
                     if(username == dbEmail && password == dbpassword)
                     {
+                        HttpContext.Session.SetInt32("userID", userId);
                         TempData["Message"] = "Login Successful";
                         TempData["Type"] = "success";
                         return RedirectToAction("Dashboard");
@@ -100,7 +102,39 @@ namespace Database_lab_project.Controllers
 
         public IActionResult Dashboard()
         {
-            return View();
+            int? currentUserId = HttpContext.Session.GetInt32("userID");
+            ViewBag.userId = currentUserId;
+            if (currentUserId == null)
+            {
+                return RedirectToAction("Login");
+            }
+                return View();
+        }
+
+        [HttpPost]
+        public IActionResult ReportFound(string itemTitle, string category, DateTime lostDate, string description, string lostLocation)
+        {
+            string connectionString = "Server=DESKTOP-87911Q0\\SQLEXPRESS;Database=dbms_lab_project;Trusted_Connection=True;TrustServerCertificate=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                int? currentUser = HttpContext.Session.GetInt32("userID");
+                string query = "insert into items (title, description, category, lost_date, location_found, is_found, id) values (@title, @description, @category, @date, @lostLocation, @is_found, @id)";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@title", itemTitle);
+                cmd.Parameters.AddWithValue("@description", description);
+                cmd.Parameters.AddWithValue("@category", category);
+                cmd.Parameters.AddWithValue("@date", lostDate);
+                cmd.Parameters.AddWithValue("@lostLocation", lostLocation);
+                cmd.Parameters.AddWithValue("@is_found", "not found");
+                cmd.Parameters.AddWithValue("@id", currentUser);
+                cmd.ExecuteNonQuery();
+                TempData["Message"] = "Item Reported Successfully!";
+                TempData["Type"] = "success";
+                return RedirectToAction("Dashboard");
+            }
+
         }
 
     }
