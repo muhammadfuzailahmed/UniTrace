@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dash-page">
+    <nav class="dash-nav">
+        <div class="logo"> <a class="HeaderLink" href="/Home/Dashboard">Uni<span>Trace</span></a></div>
+
+        <div class="nav-actions">
+            <button class="outline-red" onclick="openModal('lostModal')">+ Find Lost Item</button>
+            <button class="green-btn" onclick="openModal('foundModal')">+ Report Found</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <p class="badge">LOST & FOUND PLATFORM</p>
+        <h1>Reuniting people<br />with their <span>belongings</span></h1>
+        <p class="hero-text">Browse items reported lost or found in your area. Submit a report and help someone recover what matters.</p>
+
+        <div class="hero-buttons">
+            <button class="outline-red" onclick="openModal('lostModal')">+ I Lost Something</button>
+            <button class="green-btn" onclick="openModal('foundModal')">+ I Found Something</button>
+        </div>
+    </section>
+</div>
+
+<!-- LOST MODAL -->
+<div class="modal" id="lostModal">
+    <div class="modal-card search-card">
+        <button class="close-btn" onclick="closeModal('lostModal')">×</button>
+
+        <div class="modal-title lost-dot">
+            <span></span>
+            <h2>Search Lost Items</h2>
+        </div>
+
+        <form method="post" action="/Home/SearchLost">
+            <label>Search item</label>
+            <input type="text" name="searchText" placeholder="e.g. wallet, CNIC, mobile..." required />
+
+            <button type="submit" class="submit-lost">Search</button>
+        </form>
+    </div>
+</div>
+
+<!-- FOUND MODAL -->
+<div class="modal" id="foundModal">
+    <div class="modal-card">
+        <button class="close-btn" onclick="closeModal('foundModal')">×</button>
+        <div class="modal-title found-dot"><span></span><h2>Report Found Item</h2></div>
+
+        <form>
+            <h4>ITEM DETAILS</h4>
+            <label>Item Title *</label>
+            <input placeholder="e.g. Blue Nokia Phone" />
+
+            <div class="row">
+                <div>
+                    <label>Category *</label>
+                    <select name="category" required>
+                        <option value="">Select category</option>
+                        <option>University ID</option>
+                        <option>CNIC</option>
+                        <option>Mobile</option>
+                        <option>Wallet</option>
+                        <option>Key chain</option>
+                        <option>Bag</option>
+                        <option>Water Bottle</option>
+                        <option>Others</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Date Found *</label>
+                    <input type="date" />
+                </div>
+            </div>
+
+            <label>Location Found *</label>
+            <input placeholder="e.g. Dolmen Mall, Clifton" />
+
+            <label>Description</label>
+            <textarea placeholder="Describe the item so the owner can identify it..."></textarea>
+
+            <button class="submit-found">Report Found Item</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openModal(id) {
+        document.getElementById(id).style.display = "grid";
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = "none";
+    }
+</script>
