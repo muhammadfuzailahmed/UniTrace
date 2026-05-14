@@ -175,14 +175,14 @@ button {
 }
 
     .popup.success {
-        background: rgba(0, 170, 255, 0.18);
+        background-color: black;
         border: 1px solid #00aaff;
         color: #7edbff;
         box-shadow: 0 0 35px rgba(0,170,255,0.35);
     }
 
     .popup.error {
-        background: rgba(255, 70, 90, 0.18);
+        background-color: black;
         border: 1px solid #ff465a;
         color: #ff7b89;
         box-shadow: 0 0 35px rgba(255,70,90,0.35);
@@ -229,12 +229,17 @@ button {
     font-weight: 900;
 }
 
-    .logo span,
-    .hero span {
+.logo span,
+.hero span {
         color: #00aaff;
-    }
+}
 
-.nav-actions,
+.nav-actions {
+    display: flex;
+    gap: 16px;
+    width: 40%;
+}
+
 .hero-buttons,
 .row {
     display: flex;
@@ -243,7 +248,7 @@ button {
 
 .hero {
     text-align: center;
-    padding: 120px 20px 60px;
+    padding: 30px 20px 60px;
 }
 
 .badge {
