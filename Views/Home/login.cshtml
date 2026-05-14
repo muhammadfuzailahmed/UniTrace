@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="popup @TempData["Type"]">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="brand">
+            <span></span>
+            <h1>Welcome Back</h1>
+        </div>
+
+        <p class="tagline">Login to continue your dashboard</p>
+
+        <form method="post" action="/Home/Login">
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="username" placeholder="Enter your email" required />
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required />
+            </div>
+
+            <button type="submit">Sign In</button>
+            <div class="redirectLink">Don't have an account? <a href="/Home/Register"><span class="link">Create Account</span></a></div>
+        </form>
+    </div>
+</div>

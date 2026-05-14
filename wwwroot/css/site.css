@@ -1,0 +1,203 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.auth-page {
+    min-height: 100vh;
+    height: 100vh;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.redirectLink {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Segoe UI, Arial, sans-serif;
+    background: #05070c;
+    color: #f5f7ff;
+}
+
+.auth-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: radial-gradient(circle at top, rgba(0, 140, 255, 0.22), transparent 38%), radial-gradient(circle at bottom, rgba(0, 80, 180, 0.16), transparent 35%), #05070c;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 40px;
+    border-radius: 28px;
+    background: rgba(12, 16, 26, 0.92);
+    border: 1px solid rgba(0, 145, 255, 0.22);
+    box-shadow: 0 0 45px rgba(0, 145, 255, 0.18), 0 30px 90px rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(18px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+    .brand span {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #00aaff;
+        box-shadow: 0 0 28px #00aaff;
+    }
+
+    .brand h1 {
+        margin: 0;
+        font-size: 34px;
+        font-weight: 900;
+        color: #ffffff;
+    }
+
+.tagline {
+    margin: 14px 0 32px;
+    color: #8c98b8;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+    .field label {
+        display: block;
+        margin-bottom: 8px;
+        color: #b9c7e8;
+        font-size: 14px;
+    }
+
+    .field input {
+        width: 100%;
+        padding: 16px;
+        border-radius: 14px;
+        border: 1px solid #24324d;
+        background: #101522;
+        color: white;
+        font-size: 15px;
+        outline: none;
+    }
+
+        .field input::placeholder {
+            color: #69738d;
+        }
+
+        .field input:focus {
+            border-color: #00aaff;
+            box-shadow: 0 0 0 4px rgba(0, 170, 255, 0.14);
+        }
+
+button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 16px;
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #00aaff, #006eff);
+    color: white;
+    font-size: 17px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+    button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 38px rgba(0, 145, 255, 0.38);
+    }
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 28px;
+        border-radius: 22px;
+    }
+
+    .brand h1 {
+        font-size: 28px;
+    }
+}
+
+
+.popup {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    min-width: 260px;
+    padding: 16px 20px;
+    border-radius: 16px;
+    font-weight: 800;
+    text-align: center;
+    animation: popupIn 0.4s ease, popupOut 0.5s ease 3s forwards;
+}
+
+    .popup.success {
+        background: rgba(0, 170, 255, 0.18);
+        border: 1px solid #00aaff;
+        color: #7edbff;
+        box-shadow: 0 0 35px rgba(0,170,255,0.35);
+    }
+
+    .popup.error {
+        background: rgba(255, 70, 90, 0.18);
+        border: 1px solid #ff465a;
+        color: #ff7b89;
+        box-shadow: 0 0 35px rgba(255,70,90,0.35);
+    }
+
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes popupOut {
+    to {
+        opacity: 0;
+        transform: translateX(40px) scale(0.95);
+    }
+}
