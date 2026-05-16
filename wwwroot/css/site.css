@@ -8,11 +8,13 @@ html {
     }
 }
 
+
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .auth-page {
@@ -214,6 +216,7 @@ button {
     background: radial-gradient(circle at top, rgba(0, 140, 255, 0.22), transparent 38%), radial-gradient(circle at bottom, rgba(0, 80, 180, 0.16), transparent 35%), #05070c;
     color: #f5f7ff;
     font-family: Inter, Segoe UI, Arial, sans-serif;
+    overflow-y: auto;
 }
 
 .dash-nav {
@@ -248,7 +251,7 @@ button {
 
 .hero {
     text-align: center;
-    padding: 30px 20px 60px;
+    padding: 35px 20px 60px;
 }
 
 .badge {
@@ -436,3 +439,37 @@ textarea {
         flex-direction: column;
     }
 }
+
+.dashboard-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin: 30px 0;
+}
+
+    .dashboard-tabs button {
+        width: auto;
+        padding: 12px 26px;
+    }
+
+.items-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    padding: 30px 42px;
+}
+
+.item-card {
+    background: rgba(12, 16, 26, 0.92);
+    border: 1px solid rgba(0, 145, 255, 0.22);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 0 30px rgba(0,145,255,0.15);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .item-card h3 {
+        color: #00aaff;
+    }
