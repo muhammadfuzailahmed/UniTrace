@@ -166,6 +166,38 @@ namespace Database_lab_project.Controllers
             }
 
         }
+        public IActionResult SearchPage(string searchText)
+        {
 
+            List<Item> items = new List<Item>();
+            string connectionString = "Server=DESKTOP-87911Q0\\SQLEXPRESS;Database=dbms_lab_project;Trusted_Connection=True;TrustServerCertificate=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "select * from items where title like @title";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@title", "%" + searchText + "%");
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    items.Add(new Item
+                    {
+                        itemId = Convert.ToInt32(reader["item_id"]),
+                        Title = reader["title"].ToString(),
+                        Description = reader["description"].ToString(),
+                        Category = reader["category"].ToString(),
+                        LostDate = Convert.ToDateTime(reader["lost_date"]),
+                        LocationFound = reader["location_found"].ToString(),
+                        is_found = reader["is_found"].ToString(),
+                        userId = Convert.ToInt32(reader["id"]),
+                        requestingUser = reader["requesting_user"] == DBNull.Value
+                            ? 0
+                            : Convert.ToInt32(reader["requesting_user"])
+                    });
+                }
+            }
+            return View(items);
+
+        }
     }
 }
