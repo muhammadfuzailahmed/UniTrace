@@ -473,3 +473,50 @@ textarea {
     .item-card h3 {
         color: #00aaff;
     }
+
+/*Search Page CSS*/
+
+.search-page {
+    min-height: 100vh;
+    padding: 40px;
+    background: radial-gradient(circle at top, rgba(0, 140, 255, 0.22), transparent 38%), radial-gradient(circle at bottom, rgba(0, 80, 180, 0.16), transparent 35%), #05070c;
+    color: #f5f7ff;
+}
+
+.search-card {
+    max-width: 800px;
+    margin: 0 auto 35px;
+    padding: 32px;
+    border-radius: 24px;
+    background: rgba(12, 16, 26, 0.92);
+    border: 1px solid rgba(0,145,255,0.22);
+    text-align: center;
+}
+
+    .search-card h1 {
+        color: #00aaff;
+    }
+
+    .search-card p {
+        color: #8c98b8;
+    }
+
+.search-form {
+    display: flex;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+    .search-form input {
+        flex: 1;
+    }
+
+    .search-form button {
+        width: auto;
+        padding: 14px 28px;
+    }
+
+.no-result {
+    color: #8c98b8;
+    text-align: center;
+}
