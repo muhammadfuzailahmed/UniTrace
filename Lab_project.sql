@@ -27,3 +27,5 @@ create table items (
 )
 
 select * from items where id = 2
+
+select * from items
