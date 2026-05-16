@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Database_lab_project.Models.Item>
+@{
     ViewData["Title"] = "Dashboard";
 }
 @if (TempData["Message"] != null)
@@ -20,7 +21,7 @@
 
     <section class="hero">
         <p class="badge">LOST & FOUND PLATFORM</p>
-        <p>user id: @ViewBag.userId</p>
+        @* <p>user id: @ViewBag.userId</p> *@
         <h1>Reuniting people<br />with their <span>belongings</span></h1>
         <p class="hero-text">Browse items reported lost or found in your area. Submit a report and help someone recover what matters.</p>
 
@@ -29,6 +30,37 @@
             <button class="green-btn" onclick="openModal('foundModal')">+ I Found Something</button>
         </div>
     </section>
+
+    <div class="dashboard-tabs">
+        @* <button onclick="showSection('feedSection')">Feed</button> *@
+        <button onclick="showSection('claimSection')">Claim Requests</button>
+    </div>
+
+    <section id="feedSection" class="items-grid">
+        @foreach (var item in Model)
+        {
+            <div class="item-card">
+                <div style="width: 70%">
+                <h3>@item.Title</h3>
+                <p>@item.Description</p>
+                <p><b>Category:</b> @item.Category</p>
+                <p><b>Location:</b> @item.LocationFound</p>
+                <p><b>Lost Date:</b> @item.LostDate.ToShortDateString()</p>
+                </div>
+                <div>
+                    <button class="outline-red">Claim Item</button>
+                </div>
+            </div>
+        }
+    </section>
+
+    <section id="claimSection" class="items-grid" style="display:none;">
+        <div class="item-card">
+            <h3>Claim Requests</h3>
+            <p>No claim requests yet.</p>
+        </div>
+    </section>
+
 </div>
 
 <!-- LOST MODAL -->
@@ -100,5 +132,12 @@
 
     function closeModal(id) {
         document.getElementById(id).style.display = "none";
+    }
+
+    function showSection(id) {
+        document.getElementById("feedSection").style.display = "none";
+        document.getElementById("claimSection").style.display = "none";
+
+        document.getElementById(id).style.display = "grid";
     }
 </script>
