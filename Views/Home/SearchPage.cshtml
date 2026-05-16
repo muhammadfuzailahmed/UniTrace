@@ -1,0 +1,41 @@
+﻿@model List<Database_lab_project.Models.Item>
+
+<div class="search-page">
+    <div class="search-card">
+        <h1>Search Items</h1>
+        <p>Find lost/found items from database</p>
+
+        <form method="get" action="/Home/SearchPage" class="search-form">
+            <input type="text" name="searchText" placeholder="Search wallet, CNIC, mobile..." />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+  
+    <section id="feedSection" class="items-grid">
+        @if (Model != null && Model.Count > 0)
+        {
+            
+            @foreach (var item in Model)
+            {
+                <div class="item-card">
+                    <div style="width: 70%">
+                        <h3>@item.Title</h3>
+                        <p>@item.Description</p>
+                        <p><b>Category:</b> @item.Category</p>
+                        <p><b>Location:</b> @item.LocationFound</p>
+                        <p><b>Lost Date:</b> @item.LostDate.ToShortDateString()</p>
+                    </div>
+                    <div>
+                        <button class="outline-red">Claim Item</button>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="no-result">No items found</p>
+        }
+    </section>
+
+</div>
