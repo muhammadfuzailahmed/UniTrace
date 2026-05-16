@@ -14,7 +14,11 @@
         <div class="logo"> <a class="HeaderLink" href="/Home/Dashboard">Uni<span>Trace</span></a></div>
 
         <div class="nav-actions">
-            <button class="outline-red" onclick="openModal('lostModal')">+ Find Lost Item</button>
+            <button class="outline-red">
+                <a asp-controller="Home" asp-action="SearchPage" class="HeaderLink ">
+                    + I Lost Something
+                </a>
+            </button>
             <button class="green-btn" onclick="openModal('foundModal')">+ Report Found</button>
         </div>
     </nav>
@@ -26,7 +30,11 @@
         <p class="hero-text">Browse items reported lost or found in your area. Submit a report and help someone recover what matters.</p>
 
         <div class="hero-buttons">
-            <button class="outline-red" onclick="openModal('lostModal')">+ I Lost Something</button>
+            <button class="outline-red">
+                <a asp-controller="Home" asp-action="SearchPage" class="HeaderLink ">
+                    + I Lost Something
+                </a>
+            </button>
             <button class="green-btn" onclick="openModal('foundModal')">+ I Found Something</button>
         </div>
     </section>
