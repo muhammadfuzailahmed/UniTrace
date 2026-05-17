@@ -1,4 +1,5 @@
 ﻿@model List<Database_lab_project.Models.Item>
+
 @{
     ViewData["Title"] = "Dashboard";
 }
@@ -40,7 +41,7 @@
     </section>
 
     <div class="dashboard-tabs">
-        @* <button onclick="showSection('feedSection')">Feed</button> *@
+        <button onclick="showSection('feedSection')">Feed</button> 
         <button onclick="showSection('claimSection')">Claim Requests</button>
     </div>
 
@@ -62,11 +63,30 @@
         }
     </section>
 
-    <section id="claimSection" class="items-grid" style="display:none;">
+    <section id="claimSection" class="claim-items" style="display:none;">
         <div class="item-card">
             <h3>Claim Requests</h3>
-            <p>No claim requests yet.</p>
         </div>
+        <div>
+            <div>
+                @if (ViewBag.Claims != null)
+                {
+                    foreach (var claim in ViewBag.Claims)
+                    {
+                        <div class="item-card">
+                            <h3>@claim.Title</h3>
+                            <p>Lost location: @claim.LocationFound</p>
+                            <p>Requested By: @claim.RequestingUser</p>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No claim requests yet.</p>
+                }
+            </div>
+        </div>
+        
     </section>
 
 </div>
