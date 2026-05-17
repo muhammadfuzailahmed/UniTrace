@@ -1,4 +1,10 @@
 ﻿@model List<Database_lab_project.Models.Item>
+@if (TempData["Message"] != null)
+{
+    <div class="popup @TempData["Type"]">
+        @TempData["Message"]
+    </div>
+}
 
 <div class="search-page">
     <div class="search-card">
@@ -27,7 +33,7 @@
                         <p><b>Lost Date:</b> @item.LostDate.ToShortDateString()</p>
                     </div>
                     <div>
-                        <button class="outline-red">Claim Item</button>
+                        <button onclick="showItemModal(@item.itemId)" class="outline-red">Claim Item</button>
                     </div>
                 </div>
             }
@@ -38,4 +44,42 @@
         }
     </section>
 
+    <section id="claimForm">
+        <div class="modal-card">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <div class="modal-title found-dot"><span></span><h2>Report Found Item</h2></div>
+
+            <form method="post" action="/Home/ClaimForm">
+                <h4>CLAIM ITEM</h4>
+                <input type="hidden" id="claimItemId" name="itemId" />
+
+                <label>Your Name *</label>
+                <input name="name" placeholder="e.g. Ali" />
+
+                <label>Hiddeen Details of Item *</label>
+                <input name="hiddenDetails" placeholder="Describe the item hidden details so the owner can identify it..." />
+
+                <label>Lost Location *</label>
+                <input type="text" name="lostLocation" placeholder="Lost Location e.g. Admission Cell" />
+
+                <button class="submit-claim-request">Claim Item</button>
+            </form>
+        </div>
+    </section>
+
 </div>
+
+<script>
+    let claimForm = document.getElementById("claimForm");
+    let itemId = document.getElementById("claimItemId");
+
+    function showItemModal(id) {
+           console.log(id)
+           itemId.value = id;
+           claimForm.style.display = "block";
+    }
+
+    function closeModal() {
+        claimForm.style.display = "none";
+    }
+</script> 
