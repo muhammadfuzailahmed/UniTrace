@@ -29,3 +29,16 @@ create table items (
 select * from items where id = 2
 
 select * from items
+
+create table claimItem (
+	claimId int primary key identity(1,1),
+	userId int foreign key references users(id),
+	itemId int foreign key references items(item_id),
+	requestingUserId int foreign key references users(id),
+	hiddenDetails varchar(100),
+	lostLocation varchar(50)
+)
+
+select * from claimItem
+
+SELECT * FROM items WHERE id = 2 AND requesting_user IS NOT NULL
