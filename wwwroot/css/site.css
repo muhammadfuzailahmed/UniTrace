@@ -453,7 +453,13 @@ textarea {
     }
 
 .items-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-bottom: 20px;
+    padding: 30px 42px;
+}
+
+.claim-items {
+    width: 80%;
+    margin: 0px auto;
     gap: 20px;
     padding: 30px 42px;
 }
@@ -519,4 +525,28 @@ textarea {
 .no-result {
     color: #8c98b8;
     text-align: center;
+}
+
+#claimForm {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    place-items: center;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    padding: 18px;
+}
+
+.submit-claim-request {
+    width: 100%;
+    margin-top: 16px;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #00aaff, #006eff);
+    color: white;
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
 }
