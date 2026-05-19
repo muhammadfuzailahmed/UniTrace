@@ -200,9 +200,10 @@ namespace Database_lab_project.Controllers
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string query = "select * from items where title like @title";
+                string query = "select * from items where title like @title AND is_found = @is_found";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@title", "%" + searchText + "%");
+                cmd.Parameters.AddWithValue("@is_found", "not found");
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -284,6 +285,77 @@ namespace Database_lab_project.Controllers
             return RedirectToAction("SearchPage");
         }
         
+        public IActionResult ApproveRequest(int itemId)
+        {
+            string connectionString = "Server=DESKTOP-87911Q0\\SQLEXPRESS;Database=dbms_lab_project;Trusted_Connection=True;TrustServerCertificate=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "update items set is_found = @is_found, requesting_user = null where item_id = @item_id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@is_found", "found");
+                cmd.Parameters.AddWithValue("@item_id", itemId);
+                cmd.ExecuteNonQuery();
+
+                string query2 = "select id from items where item_id = @item_id";
+                SqlCommand cmd2 = new SqlCommand(query2, conn);
+                cmd2.Parameters.AddWithValue("@item_id", itemId);
+                SqlDataReader reader = cmd2.ExecuteReader();
+                int user_id = 0;
+                while (reader.Read())
+                {
+                    user_id = Convert.ToInt32(reader["id"]);
+                }
+                reader.Close();
+
+                string null_other_user = "update users set other_user = @other_user where id = @id";
+                SqlCommand cmd3 = new SqlCommand(null_other_user, conn);
+                cmd3.Parameters.AddWithValue("@other_user", DBNull.Value);
+                cmd3.Parameters.AddWithValue("@id", user_id);
+                cmd3.ExecuteNonQuery();
+
+                TempData["Message"] = "Request Approved!";
+                TempData["Type"] = "success";
+
+                return RedirectToAction("Dashboard");
+            }
+        }
+
+        public IActionResult RejectRequest(int itemId)
+        {
+            string connectionString = "Server=DESKTOP-87911Q0\\SQLEXPRESS;Database=dbms_lab_project;Trusted_Connection=True;TrustServerCertificate=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "update items set requesting_user = null where item_id = @item_id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@item_id", itemId);
+                cmd.ExecuteNonQuery();
+
+                string query2 = "select id from items where item_id = @item_id";
+                SqlCommand cmd2 = new SqlCommand(query, conn);
+                cmd2.Parameters.AddWithValue("@item_id", itemId);
+                SqlDataReader reader = cmd2.ExecuteReader();
+                int user_id = 0;
+                while (reader.Read())
+                {
+                    user_id = Convert.ToInt32(reader["id"]);
+                }
+                reader.Close();
+
+                string null_other_user = "update users set other_user = @other_user where id = @id";
+                SqlCommand cmd3 = new SqlCommand(null_other_user, conn);
+                cmd3.Parameters.AddWithValue("@other_user", DBNull.Value);
+                cmd3.Parameters.AddWithValue("@id", user_id);
+                cmd3.ExecuteNonQuery();
+
+                TempData["Message"] = "Request Rejected!";
+                TempData["Type"] = "error";
+
+                return RedirectToAction("Dashboard");
+            }
+        }
+
 
     }
 }
