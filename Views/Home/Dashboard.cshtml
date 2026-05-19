@@ -41,7 +41,7 @@
     </section>
 
     <div class="dashboard-tabs">
-        <button onclick="showSection('feedSection')">Feed</button> 
+        <button onclick="showSection('feedSection')">Feed</button>
         <button onclick="showSection('claimSection')">Claim Requests</button>
     </div>
 
@@ -50,14 +50,14 @@
         {
             <div class="item-card">
                 <div style="width: 70%">
-                <h3>@item.Title</h3>
-                <p>@item.Description</p>
-                <p><b>Category:</b> @item.Category</p>
-                <p><b>Location:</b> @item.LocationFound</p>
-                <p><b>Lost Date:</b> @item.LostDate.ToShortDateString()</p>
+                    <h3>@item.Title</h3>
+                    <p>@item.Description</p>
+                    <p><b>Category:</b> @item.Category</p>
+                    <p><b>Location:</b> @item.LocationFound</p>
+                    <p><b>Lost Date:</b> @item.LostDate.ToShortDateString()</p>
                 </div>
                 <div>
-                    <button class="outline-red">Claim Item</button>
+                    <button onclick="showItemModal(@item.itemId)" class="outline-red">Claim Item</button>
                 </div>
             </div>
         }
@@ -73,10 +73,25 @@
                 {
                     foreach (var claim in ViewBag.Claims)
                     {
+                        
+                        
                         <div class="item-card">
-                            <h3>@claim.Title</h3>
-                            <p>Lost location: @claim.LocationFound</p>
-                            <p>Requested By: @claim.RequestingUser</p>
+                            <div style="width: 70%">
+                                <h3>@claim.Title</h3>
+                                <p>Requested By: @claim.RequestingUser</p>
+                                <p>Requested By: @claim.LocationFound</p>
+                            </div>
+                            <div>
+                                <form method="post" action="/Home/ApproveRequest" style="display:inline;">
+                                    <input type="hidden" name="itemId" value="@claim.ItemId" />
+                                    <button type="submit" class="outline-red">✔️ Approve</button>
+                                </form>
+
+                                <form method="post" action="/Home/RejectRequest" style="display:inline;">
+                                    <input type="hidden" name="itemId" value="@claim.ItemId" />
+                                    <button type="submit" class="green-btn">❌ Reject</button>
+                                </form>
+                            </div>
                         </div>
                     }
                 }
@@ -153,7 +168,32 @@
     </div>
 </div>
 
+<section id="claimForm">
+    <div class="modal-card">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <div class="modal-title found-dot"><span></span><h2>Report Found Item</h2></div>
+
+        <form method="post" action="/Home/ClaimForm">
+            <h4>CLAIM ITEM</h4>
+            <input type="hidden" id="claimItemId" name="itemId" />
+
+            <label>Your Name *</label>
+            <input name="name" placeholder="e.g. Ali" />
+
+            <label>Hiddeen Details of Item *</label>
+            <input name="hiddenDetails" placeholder="Describe the item hidden details so the owner can identify it..." />
+
+            <label>Lost Location *</label>
+            <input type="text" name="lostLocation" placeholder="Lost Location e.g. Admission Cell" />
+
+            <button class="submit-claim-request">Claim Item</button>
+        </form>
+    </div>
+</section>
+
 <script>
+        let claimForm = document.getElementById("claimForm");
+    let itemId = document.getElementById("claimItemId");
     function openModal(id) {
         document.getElementById(id).style.display = "grid";
     }
@@ -162,10 +202,24 @@
         document.getElementById(id).style.display = "none";
     }
 
+      function showItemModal(id) {
+           console.log(id)
+           itemId.value = id;
+           claimForm.style.display = "block";
+    }
+
     function showSection(id) {
         document.getElementById("feedSection").style.display = "none";
         document.getElementById("claimSection").style.display = "none";
 
         document.getElementById(id).style.display = "grid";
+    }
+
+        function closeModal() {
+        claimForm.style.display = "none";
+    }
+
+    function approveRequest(id){
+        console.log(id)
     }
 </script>
