@@ -86,6 +86,30 @@ namespace Database_lab_project.Controllers
             {
                 conn.Open();
 
+                string oldUser = "select email from users where email = @email";
+                SqlCommand oldUserCmd = new SqlCommand(oldUser, conn);
+                oldUserCmd.Parameters.AddWithValue("@email", email);
+
+                SqlDataReader reader = oldUserCmd.ExecuteReader();
+                bool found = false;
+                while(reader.Read())
+                {
+                    if(email == reader["email"].ToString())
+                    {
+                        found = true;
+                        break;
+                    }
+                }    
+
+                if(found == true)
+                {
+                    TempData["Message"] = "User Already Exists";
+                    TempData["Type"] = "error";
+
+                    return RedirectToAction("Register");
+                }
+
+
                 string query = "insert into users (name, email, password) values (@Name, @Email, @Password)";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -356,6 +380,11 @@ namespace Database_lab_project.Controllers
             }
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
+        }
 
     }
 }
