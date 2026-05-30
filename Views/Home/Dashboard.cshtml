@@ -23,6 +23,9 @@
             <button class="green-btn" onclick="openModal('foundModal')">+ Report Found</button>
         </div>
     </nav>
+    <div class="logout-div">
+           <button class="red-btn" onclick="location.href='/Home/Logout'">Logout</button>
+    </div>
 
     <section class="hero">
         <p class="badge">LOST & FOUND PLATFORM</p>
@@ -57,11 +60,19 @@
                     <p><b>Lost Date:</b> @item.LostDate.ToShortDateString()</p>
                 </div>
                 <div>
-                    <button onclick="showItemModal(@item.itemId)" class="outline-red">Claim Item</button>
+                    @if (item.userId != ViewBag.userId)
+                    {
+                        <button onclick="showItemModal(@item.itemId)" class="outline-red">Claim Item</button>
+                    }
+                    else
+                    {
+                        <span class="badge" style="color: gray; font-weight: bold;">Your Posted Item</span>
+                    }
                 </div>
             </div>
         }
     </section>
+
 
     <section id="claimSection" class="claim-items" style="display:none;">
         <div class="item-card">
@@ -170,7 +181,7 @@
 
 <section id="claimForm">
     <div class="modal-card">
-        <button class="close-btn" onclick="closeModal()">×</button>
+        <button class="close-btn" onclick="closeModalClaimForm()">×</button>
         <div class="modal-title found-dot"><span></span><h2>Report Found Item</h2></div>
 
         <form method="post" action="/Home/ClaimForm">
@@ -215,7 +226,7 @@
         document.getElementById(id).style.display = "grid";
     }
 
-        function closeModal() {
+        function closeModalClaimForm() {
         claimForm.style.display = "none";
     }
 
