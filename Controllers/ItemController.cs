@@ -35,6 +35,8 @@ namespace Database_lab_project.Controllers
         {
 
             List<Item> items = new List<Item>();
+            int? currentUserId = HttpContext.Session.GetInt32("userID");
+            ViewBag.userId = currentUserId;
             string connectionString = "Server=DESKTOP-87911Q0\\SQLEXPRESS;Database=dbms_lab_project;Trusted_Connection=True;TrustServerCertificate=True;";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
