@@ -41,11 +41,12 @@ namespace Database_lab_project.Controllers
                     }
 
                 }
+                reader.Close();
 
             }
             TempData["Message"] = "Login Failed";
             TempData["Type"] = "error";
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Auth");
         }
 
         public IActionResult Register()
@@ -81,7 +82,7 @@ namespace Database_lab_project.Controllers
                     TempData["Message"] = "User Already Exists";
                     TempData["Type"] = "error";
 
-                    return RedirectToAction("Register");
+                    return RedirectToAction("Register", "Auth");
                 }
 
 
@@ -96,14 +97,14 @@ namespace Database_lab_project.Controllers
                 TempData["Message"] = "Account Created Successfully";
                 TempData["Type"] = "success";
 
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Auth");
             }
         }
 
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Auth");
         }
 
     }
