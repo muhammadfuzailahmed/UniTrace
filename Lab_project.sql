@@ -30,6 +30,8 @@ select * from items where id = 2
 
 select * from items
 
+update users set other_user = null 
+
 create table claimItem (
 	claimId int primary key identity(1,1),
 	userId int foreign key references users(id),
@@ -42,3 +44,6 @@ create table claimItem (
 select * from claimItem
 
 SELECT * FROM items WHERE id = 2 AND requesting_user IS NOT NULL
+
+
+select email from users where email = 'fuzail@gmail.com'

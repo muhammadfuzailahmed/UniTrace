@@ -12,11 +12,11 @@
 
 <div class="dash-page">
     <nav class="dash-nav">
-        <div class="logo"> <a class="HeaderLink" href="/Home/Dashboard">Uni<span>Trace</span></a></div>
+        <div class="logo"> <a class="HeaderLink" href="/Dashboard/Dashboard">Uni<span>Trace</span></a></div>
 
         <div class="nav-actions">
             <button class="outline-red">
-                <a asp-controller="Home" asp-action="SearchPage" class="HeaderLink ">
+                <a asp-controller="Item" asp-action="SearchPage" class="HeaderLink">
                     + I Lost Something
                 </a>
             </button>
@@ -24,18 +24,17 @@
         </div>
     </nav>
     <div class="logout-div">
-           <button class="red-btn" onclick="location.href='/Home/Logout'">Logout</button>
+           <button class="red-btn" onclick="location.href='/Auth/Logout'">Logout</button>
     </div>
 
     <section class="hero">
         <p class="badge">LOST & FOUND PLATFORM</p>
-        @* <p>user id: @ViewBag.userId</p> *@
         <h1>Reuniting people<br />with their <span>belongings</span></h1>
         <p class="hero-text">Browse items reported lost or found in your area. Submit a report and help someone recover what matters.</p>
 
         <div class="hero-buttons">
             <button class="outline-red">
-                <a asp-controller="Home" asp-action="SearchPage" class="HeaderLink ">
+                <a asp-controller="Item" asp-action="SearchPage" class="HeaderLink ">
                     + I Lost Something
                 </a>
             </button>
@@ -93,12 +92,12 @@
                                 <p>Requested By: @claim.LocationFound</p>
                             </div>
                             <div>
-                                <form method="post" action="/Home/ApproveRequest" style="display:inline;">
+                                <form method="post" action="/Claim/ApproveRequest" style="display:inline;">
                                     <input type="hidden" name="itemId" value="@claim.ItemId" />
                                     <button type="submit" class="outline-red">✔️ Approve</button>
                                 </form>
 
-                                <form method="post" action="/Home/RejectRequest" style="display:inline;">
+                                <form method="post" action="/Claim/RejectRequest" style="display:inline;">
                                     <input type="hidden" name="itemId" value="@claim.ItemId" />
                                     <button type="submit" class="green-btn">❌ Reject</button>
                                 </form>
@@ -117,32 +116,13 @@
 
 </div>
 
-<!-- LOST MODAL -->
-<div class="modal" id="lostModal">
-    <div class="modal-card search-card">
-        <button class="close-btn" onclick="closeModal('lostModal')">×</button>
-
-        <div class="modal-title lost-dot">
-            <span></span>
-            <h2>Search Lost Items</h2>
-        </div>
-
-        <form method="post" action="/Home/SearchLost">
-            <label>Search item</label>
-            <input type="text" name="searchText" placeholder="e.g. wallet, CNIC, mobile..." required />
-
-            <button type="submit" class="submit-lost">Search</button>
-        </form>
-    </div>
-</div>
-
 <!-- FOUND MODAL -->
 <div class="modal" id="foundModal">
     <div class="modal-card">
         <button class="close-btn" onclick="closeModal('foundModal')">×</button>
         <div class="modal-title found-dot"><span></span><h2>Report Found Item</h2></div>
 
-        <form method="post" action="/Home/ReportFound">
+        <form method="post" action="/Item/ReportFound">
             <h4>ITEM DETAILS</h4>
             <label>Item Title *</label>
             <input name="itemTitle" placeholder="e.g. Blue Nokia Phone" />
@@ -169,7 +149,7 @@
             </div>
 
             <label>Location Found *</label>
-            <input name="lostLocation" placeholder="e.g. Dolmen Mall, Clifton" />
+            <input name="lostLocation" placeholder="e.g. Block H, CS Depart" />
 
             <label>Description</label>
             <textarea name="description" placeholder="Describe the item so the owner can identify it..."></textarea>
@@ -184,7 +164,7 @@
         <button class="close-btn" onclick="closeModalClaimForm()">×</button>
         <div class="modal-title found-dot"><span></span><h2>Report Found Item</h2></div>
 
-        <form method="post" action="/Home/ClaimForm">
+        <form method="post" action="/Claim/ClaimForm">
             <h4>CLAIM ITEM</h4>
             <input type="hidden" id="claimItemId" name="itemId" />
 
