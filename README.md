@@ -136,7 +136,22 @@ Local setup depends on your SQL Server instance and permissions. These instructi
 - Connection settings are duplicated in controllers. Centralized configuration and clearer error handling remain improvements.
 - Image uploads, automated ownership verification, messaging and notifications are not implemented.
 
-## Possible next steps
+## Planned MERN version
+
+The next major version of UniTrace is planned as a rebuild using **MongoDB, Express.js, React and Node.js (MERN)**. The goal is to expand this prototype into a more complete campus lost-and-found experience.
+
+Planned features and improvements include:
+
+- **Item photos:** Upload pictures with found-item reports to make belongings easier to identify.
+- **New-item email alerts:** Notify users when new found-item reports are posted.
+- **Claim submission emails:** Notify the person who posted an item when someone submits a claim.
+- **Claim decision emails:** Notify the claimant when their request is approved or rejected.
+- **Improved claim review:** Present identifying details clearly and support multiple pending claims per item.
+- **Stronger validation and access controls:** Improve account security, input validation and authorization throughout the application.
+
+These are future plans and are **not implemented in the current ASP.NET Core version**. The technology stack and setup instructions above describe the current repository. No release date has been set for the MERN version.
+
+## Current version improvements
 
 - Fix registration and claim rejection behavior.
 - Improve account security and enforce authorization on every protected action.
